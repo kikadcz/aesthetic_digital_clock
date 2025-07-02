@@ -95,3 +95,22 @@ class PolClock;
         self.button_12hr.pack(side="left", padx=10)
 
         self.canvas.create_window(400, 40, window=self.button_frame)
+
+    def _set_format(self, format_type):
+        self.time_format = format_type
+
+    def _update_time(self):
+        if self.time_format == "12-Hour":
+            current_time = time.strftime("%I:%M:%S").lstrip()
+        else:
+            current_time = time.strftime("%I:%M:%S")
+
+        self.label.config(text=current_time)
+        self.label_after(500, self._update_time)
+
+    def run(self):
+        self.window.mainloop()
+
+if __name__ == "__main__":
+    my_clock = PolClock()
+    my_clock.run()
