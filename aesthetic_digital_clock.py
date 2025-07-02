@@ -38,4 +38,24 @@ class PolClock;
         self.canvas.pack(fill="both", expand=True)
         self.cavas.configure(bg=self._bg_color)
 
+    def _draw_strategic_dots(self):
+        spacing = 60
+        width = 800
+        height = 320
 
+        for x in range(0, width, spacing):
+            for y in range(0, height, spacing):
+
+                in_upper_left = x < width * 0.35 and y < height * 035
+                in_lower_right = x > width * 0.65 and y > height * 0.65
+
+                if in_upper_left or in_lower_right:
+                    size = random.choice([15, 25, 35, 45])
+                    offset = size // 2
+
+                    color = random.choice(self._dot_colors)
+
+                    self.canvas.create_oval(
+                        x - offset, y - offset, x + offset, y + offset,
+                        fill=color, outline=""
+                    )
