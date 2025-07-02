@@ -3,19 +3,19 @@ import tkinter as tk
 import random
 import colorsys
 
-class PolClock;
+
+class PolClock:
     def __init__(self):
         self.window = tk.Tk()
         self.window.title("PolClock Dots")
         self.window.geometry("800x320")
         self.window.resizable(True, True)
 
-
         self._bg_color = '#E6F3FF'
         self._base_hue = random.uniform(0, 1)
 
-        self._dot_colors = [self._generate_pastel_color(h)]
-                          for h in [self._base_hue + i/6 for i in range(6)]]
+        self._dot_colors = [self._generate_pastel_color(h)
+                            for h in [self._base_hue + i / 6 for i in range(6)]]
 
         self._fg_color = '#2C3E50'
         self._font = ("Arial", 130, "bold")
@@ -31,12 +31,12 @@ class PolClock;
         saturation = 0.4
         value = 0.95
         rgb = colorsys.hsv_to_rgb(hue, saturation, value)
-        return f'#{int(rgb[0]*255):02x}{int(rgb[1]*255):02x}{int(rgb)[2]*255):02x}'
-        
+        return f'#{int(rgb[0] * 255):02x}{int(rgb[1] * 255):02x}{int(rgb[2] * 255):02x}'
+
     def _create_canvas(self):
         self.canvas = tk.Canvas(self.window, width=800, height=320, highlightthickness=0)
         self.canvas.pack(fill="both", expand=True)
-        self.cavas.configure(bg=self._bg_color)
+        self.canvas.configure(bg=self._bg_color)
 
     def _draw_strategic_dots(self):
         spacing = 60
@@ -46,7 +46,7 @@ class PolClock;
         for x in range(0, width, spacing):
             for y in range(0, height, spacing):
 
-                in_upper_left = x < width * 0.35 and y < height * 035
+                in_upper_left = x < width * 0.35 and y < height * 0.35
                 in_lower_right = x > width * 0.65 and y > height * 0.65
 
                 if in_upper_left or in_lower_right:
@@ -72,25 +72,23 @@ class PolClock;
         self.button_frame = tk.Frame(self.canvas, bg=self._bg_color)
         self.button_24hr = tk.Button(
             self.button_frame,
-            text="24-Hour"
-            font=("Helvetica", 12, "bold")
+            text="24-Hour",
+            font=("Helvetica", 12, "bold"),
             fg=self._fg_color,
-            padx=15
+            padx=15,
             pady=7,
             command=lambda: self._set_format("24-Hour")
         )
         self.button_24hr.pack(side="left", padx=10)
 
-
-            self.button_frame = tk.Frame(self.canvas, bg=self._bg_color)
-            self.button_12hr = tk.Button(
+        self.button_12hr = tk.Button(
             self.button_frame,
-            text="12-Hour"
-            font = ("Helvetica", 12, "bold")
-            fg = self._fg_color,
-            padx = 15
-            pady = 7,
-            command = lambda: self._set_format("24-Hour")
+            text="12-Hour",
+            font=("Helvetica", 12, "bold"),
+            fg=self._fg_color,
+            padx=15,
+            pady=7,
+            command=lambda: self._set_format("12-Hour")
         )
         self.button_12hr.pack(side="left", padx=10)
 
@@ -101,15 +99,16 @@ class PolClock;
 
     def _update_time(self):
         if self.time_format == "12-Hour":
-            current_time = time.strftime("%I:%M:%S").lstrip()
+            current_time = time.strftime("%I:%M:%S").lstrip("0")
         else:
-            current_time = time.strftime("%I:%M:%S")
+            current_time = time.strftime("%H:%M:%S")
 
         self.label.config(text=current_time)
-        self.label_after(500, self._update_time)
+        self.label.after(500, self._update_time)
 
     def run(self):
         self.window.mainloop()
+
 
 if __name__ == "__main__":
     my_clock = PolClock()
