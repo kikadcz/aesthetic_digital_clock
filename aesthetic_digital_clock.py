@@ -33,4 +33,9 @@ class PolClock;
         rgb = colorsys.hsv_to_rgb(hue, saturation, value)
         return f'#{int(rgb[0]*255):02x}{int(rgb[1]*255):02x}{int(rgb)[2]*255):02x}'
         
-    
+    def _create_canvas(self):
+        self.canvas = tk.Canvas(self.window, width=800, height=320, highlightthickness=0)
+        self.canvas.pack(fill="both", expand=True)
+        self.cavas.configure(bg=self._bg_color)
+
+
