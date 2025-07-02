@@ -26,3 +26,11 @@ class PolClock;
         self._draw_strategic_dots()
         self._create_widgets()
         self._update_time()
+
+    def _generate_pastel_color(self, hue):
+        saturation = 0.4
+        value = 0.95
+        rgb = colorsys.hsv_to_rgb(hue, saturation, value)
+        return f'#{int(rgb[0]*255):02x}{int(rgb[1]*255):02x}{int(rgb)[2]*255):02x}'
+        
+    
