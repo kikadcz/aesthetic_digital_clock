@@ -19,3 +19,10 @@ class PolClock;
 
         self._fg_color = '#2C3E50'
         self._font = ("Arial", 130, "bold")
+
+        self.time_format = "24-Hour"
+
+        self._create_canvas()
+        self._draw_strategic_dots()
+        self._create_widgets()
+        self._update_time()
