@@ -59,3 +59,39 @@ class PolClock;
                         x - offset, y - offset, x + offset, y + offset,
                         fill=color, outline=""
                     )
+
+    def _create_widgets(self):
+        self.label = tk.Label(
+            self.canvas,
+            font=self._font,
+            bg=self._bg_color,
+            fg=self._fg_color
+        )
+        self.canvas.create_window(400, 160, window=self.label)
+
+        self.button_frame = tk.Frame(self.canvas, bg=self._bg_color)
+        self.button_24hr = tk.Button(
+            self.button_frame,
+            text="24-Hour"
+            font=("Helvetica", 12, "bold")
+            fg=self._fg_color,
+            padx=15
+            pady=7,
+            command=lambda: self._set_format("24-Hour")
+        )
+        self.button_24hr.pack(side="left", padx=10)
+
+
+            self.button_frame = tk.Frame(self.canvas, bg=self._bg_color)
+            self.button_12hr = tk.Button(
+            self.button_frame,
+            text="12-Hour"
+            font = ("Helvetica", 12, "bold")
+            fg = self._fg_color,
+            padx = 15
+            pady = 7,
+            command = lambda: self._set_format("24-Hour")
+        )
+        self.button_12hr.pack(side="left", padx=10)
+
+        self.canvas.create_window(400, 40, window=self.button_frame)
